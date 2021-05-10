@@ -11,32 +11,21 @@ import edu.byu.cs.tweeter.shared.domain.User;
 /**
  * Background task that establishes a following relationship between two users.
  */
-public class FollowTask extends Template{
+public class FollowTask extends Template {
     private static final String LOG_TAG = "FollowTask";
 
 
-    /**
-     * Auth token for logged-in user.
-     * This user is the "follower" in the relationship.
-     */
-    private AuthToken authToken;
-    /**
-     * The user that is being followed.
-     */
-    private User followee;
-
-
     public FollowTask(AuthToken authToken, User followee, Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.followee = followee;
-        this.messageHandler = messageHandler;
     }
 
     @Override
     public void run() {
         try {
 
-            sendSuccessMessage();
+            sendSuccessMessageTemplate();
 
         } catch (Exception ex) {
             Log.e(LOG_TAG, ex.getMessage(), ex);

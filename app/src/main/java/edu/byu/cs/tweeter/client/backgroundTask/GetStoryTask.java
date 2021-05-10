@@ -17,45 +17,16 @@ import edu.byu.cs.tweeter.shared.domain.User;
 /**
  * Background task that retrieves a page of statuses from a user's story.
  */
-public class GetStoryTask implements Runnable {
+public class GetStoryTask extends Template {
     private static final String LOG_TAG = "GetStoryTask";
-
-    public static final String SUCCESS_KEY = "success";
-    public static final String STATUSES_KEY = "statuses";
-    public static final String MORE_PAGES_KEY = "more-pages";
-    public static final String MESSAGE_KEY = "message";
-    public static final String EXCEPTION_KEY = "exception";
-
-    /**
-     * Auth token for logged-in user.
-     */
-    private AuthToken authToken;
-    /**
-     * The user whose story is being retrieved.
-     * (This can be any user, not just the currently logged-in user.)
-     */
-    private User targetUser;
-    /**
-     * Maximum number of statuses to return (i.e., page size).
-     */
-    private int limit;
-    /**
-     * The last status returned in the previous page of results (can be null).
-     * This allows the new page to begin where the previous page ended.
-     */
-    private Status lastStatus;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
 
     public GetStoryTask(AuthToken authToken, User targetUser, int limit, Status lastStatus,
                         Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.targetUser = targetUser;
         this.limit = limit;
         this.lastStatus = lastStatus;
-        this.messageHandler = messageHandler;
     }
 
     @Override

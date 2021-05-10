@@ -16,45 +16,16 @@ import edu.byu.cs.tweeter.shared.domain.User;
 /**
  * Background task that retrieves a page of followers.
  */
-public class GetFollowersTask implements Runnable {
+public class GetFollowersTask extends Template {
     private static final String LOG_TAG = "GetFollowersTask";
-
-    public static final String SUCCESS_KEY = "success";
-    public static final String FOLLOWERS_KEY = "followers";
-    public static final String MORE_PAGES_KEY = "more-pages";
-    public static final String MESSAGE_KEY = "message";
-    public static final String EXCEPTION_KEY = "exception";
-
-    /**
-     * Auth token for logged-in user.
-     */
-    private AuthToken authToken;
-    /**
-     * The user whose followers are being retrieved.
-     * (This can be any user, not just the currently logged-in user.)
-     */
-    private User targetUser;
-    /**
-     * Maximum number of followers to return (i.e., page size).
-     */
-    private int limit;
-    /**
-     * The last follower returned in the previous page of results (can be null).
-     * This allows the new page to begin where the previous page ended.
-     */
-    private User lastFollower;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
 
     public GetFollowersTask(AuthToken authToken, User targetUser, int limit, User lastFollower,
                             Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.targetUser = targetUser;
         this.limit = limit;
         this.lastFollower = lastFollower;
-        this.messageHandler = messageHandler;
     }
 
     @Override

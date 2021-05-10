@@ -11,32 +11,13 @@ import edu.byu.cs.tweeter.shared.domain.User;
 /**
  * Background task that queries how many other users a specified user is following.
  */
-public class GetFollowingCountTask implements Runnable {
+public class GetFollowingCountTask extends Template{
     private static final String LOG_TAG = "LogoutTask";
 
-    public static final String SUCCESS_KEY = "success";
-    public static final String COUNT_KEY = "count";
-    public static final String MESSAGE_KEY = "message";
-    public static final String EXCEPTION_KEY = "exception";
-
-    /**
-     * Auth token for logged-in user.
-     */
-    private AuthToken authToken;
-    /**
-     * The user whose following count is being retrieved.
-     * (This can be any user, not just the currently logged-in user.)
-     */
-    private User targetUser;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
-
     public GetFollowingCountTask(AuthToken authToken, User targetUser, Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.targetUser = targetUser;
-        this.messageHandler = messageHandler;
     }
 
     @Override

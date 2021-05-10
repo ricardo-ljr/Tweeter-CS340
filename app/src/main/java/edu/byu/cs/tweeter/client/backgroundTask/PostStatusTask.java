@@ -11,31 +11,13 @@ import edu.byu.cs.tweeter.shared.domain.Status;
 /**
  * Background task that posts a new status sent by a user.
  */
-public class PostStatusTask implements Runnable {
+public class PostStatusTask extends Template {
     private static final String LOG_TAG = "PostStatusTask";
 
-    public static final String SUCCESS_KEY = "success";
-    public static final String MESSAGE_KEY = "message";
-    public static final String EXCEPTION_KEY = "exception";
-
-    /**
-     * Auth token for logged-in user.
-     */
-    private AuthToken authToken;
-    /**
-     * The new status being sent. Contains all properties of the status,
-     * including the identity of the user sending the status.
-     */
-    private Status status;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
-
     public PostStatusTask(AuthToken authToken, Status status, Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.status = status;
-        this.messageHandler = messageHandler;
     }
 
     @Override

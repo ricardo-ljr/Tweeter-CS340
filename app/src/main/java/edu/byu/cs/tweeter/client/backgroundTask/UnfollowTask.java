@@ -11,28 +11,11 @@ import edu.byu.cs.tweeter.shared.domain.User;
 /**
  * Background task that removes a following relationship between two users.
  */
-public class UnfollowTask implements Runnable {
+public class UnfollowTask extends Template {
     private static final String LOG_TAG = "UnfollowTask";
 
-    public static final String SUCCESS_KEY = "success";
-    public static final String MESSAGE_KEY = "message";
-    public static final String EXCEPTION_KEY = "exception";
-
-    /**
-     * Auth token for logged-in user.
-     * This user is the "follower" in the relationship.
-     */
-    private AuthToken authToken;
-    /**
-     * The user that is being followed.
-     */
-    private User followee;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
-
     public UnfollowTask(AuthToken authToken, User followee, Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.followee = followee;
         this.messageHandler = messageHandler;

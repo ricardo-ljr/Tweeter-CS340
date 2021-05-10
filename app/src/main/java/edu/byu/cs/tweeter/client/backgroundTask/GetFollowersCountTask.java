@@ -14,27 +14,10 @@ import edu.byu.cs.tweeter.shared.domain.User;
 public class GetFollowersCountTask extends Template {
     private static final String LOG_TAG = "LogoutTask";
 
-    public static final String COUNT_KEY = "count";
-
-
-    /**
-     * Auth token for logged-in user.
-     */
-    private AuthToken authToken;
-    /**
-     * The user whose follower count is being retrieved.
-     * (This can be any user, not just the currently logged-in user.)
-     */
-    private User targetUser;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
-
     public GetFollowersCountTask(AuthToken authToken, User targetUser, Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.targetUser = targetUser;
-        this.messageHandler = messageHandler;
     }
 
     @Override

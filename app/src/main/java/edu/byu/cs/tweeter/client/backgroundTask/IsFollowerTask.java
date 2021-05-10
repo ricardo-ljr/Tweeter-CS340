@@ -13,36 +13,15 @@ import edu.byu.cs.tweeter.shared.domain.User;
 /**
  * Background task that determines if one user is following another.
  */
-public class IsFollowerTask implements Runnable {
+public class IsFollowerTask extends Template {
     private static final String LOG_TAG = "IsFollowerTask";
 
-    public static final String SUCCESS_KEY = "success";
-    public static final String IS_FOLLOWER_KEY = "is-follower";
-    public static final String MESSAGE_KEY = "message";
-    public static final String EXCEPTION_KEY = "exception";
-
-    /**
-     * Auth token for logged-in user.
-     */
-    private AuthToken authToken;
-    /**
-     * The alleged follower.
-     */
-    private User follower;
-    /**
-     * The alleged followee.
-     */
-    private User followee;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
 
     public IsFollowerTask(AuthToken authToken, User follower, User followee, Handler messageHandler) {
+        super(messageHandler);
         this.authToken = authToken;
         this.follower = follower;
         this.followee = followee;
-        this.messageHandler = messageHandler;
     }
 
     @Override
