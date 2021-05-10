@@ -11,12 +11,9 @@ import edu.byu.cs.tweeter.shared.domain.User;
 /**
  * Background task that establishes a following relationship between two users.
  */
-public class FollowTask implements Runnable {
+public class FollowTask extends Template{
     private static final String LOG_TAG = "FollowTask";
 
-    public static final String SUCCESS_KEY = "success";
-    public static final String MESSAGE_KEY = "message";
-    public static final String EXCEPTION_KEY = "exception";
 
     /**
      * Auth token for logged-in user.
@@ -27,10 +24,7 @@ public class FollowTask implements Runnable {
      * The user that is being followed.
      */
     private User followee;
-    /**
-     * Message handler that will receive task results.
-     */
-    private Handler messageHandler;
+
 
     public FollowTask(AuthToken authToken, User followee, Handler messageHandler) {
         this.authToken = authToken;
@@ -50,15 +44,15 @@ public class FollowTask implements Runnable {
         }
     }
 
-    private void sendSuccessMessage() {
-        Bundle msgBundle = new Bundle();
-        msgBundle.putBoolean(SUCCESS_KEY, true);
-
-        Message msg = Message.obtain();
-        msg.setData(msgBundle);
-
-        messageHandler.sendMessage(msg);
-    }
+//    private void sendSuccessMessage() {
+//        Bundle msgBundle = new Bundle();
+//        msgBundle.putBoolean(SUCCESS_KEY, true);
+//
+//        Message msg = Message.obtain();
+//        msg.setData(msgBundle);
+//
+//        messageHandler.sendMessage(msg);
+//    }
 
     private void sendFailedMessage(String message) {
         Bundle msgBundle = new Bundle();
