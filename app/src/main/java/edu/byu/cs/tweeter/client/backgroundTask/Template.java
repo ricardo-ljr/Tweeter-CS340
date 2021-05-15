@@ -120,6 +120,12 @@ public class Template implements Runnable {
      */
     protected String image;
 
+
+    /**
+     * Constructor to initialize message handler
+     *
+     * @param messageHandler
+     */
     public Template(Handler messageHandler) {
         this.messageHandler = messageHandler;
     }
@@ -149,6 +155,17 @@ public class Template implements Runnable {
         msgBundle.putBoolean(SUCCESS_KEY, true);
         msgBundle.putSerializable(key, (Serializable) value);
         msgBundle.putBoolean(MORE_PAGES_KEY, isTrue);
+
+        Message msg = Message.obtain();
+        msg.setData(msgBundle);
+
+        messageHandler.sendMessage(msg);
+    }
+
+    protected void sendSuccessMessageInt(int count) {
+        Bundle msgBundle = new Bundle();
+        msgBundle.putBoolean(SUCCESS_KEY, true);
+        msgBundle.putInt(COUNT_KEY, count);
 
         Message msg = Message.obtain();
         msg.setData(msgBundle);

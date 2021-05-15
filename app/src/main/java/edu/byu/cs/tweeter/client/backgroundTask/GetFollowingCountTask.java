@@ -24,23 +24,11 @@ public class GetFollowingCountTask extends Template{
     public void run() {
         try {
 
-            sendSuccessMessage(20);
+            sendSuccessMessageInt(20);
 
         } catch (Exception ex) {
             Log.e(LOG_TAG, ex.getMessage(), ex);
             sendMessage(EXCEPTION_KEY, ex);
         }
     }
-
-    private void sendSuccessMessage(int count) {
-        Bundle msgBundle = new Bundle();
-        msgBundle.putBoolean(SUCCESS_KEY, true);
-        msgBundle.putInt(COUNT_KEY, count);
-
-        Message msg = Message.obtain();
-        msg.setData(msgBundle);
-
-        messageHandler.sendMessage(msg);
-    }
-
 }
