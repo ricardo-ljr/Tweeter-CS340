@@ -133,6 +133,28 @@ public class Template implements Runnable {
         messageHandler.sendMessage(msg);
     }
 
+    protected void sendExceptionMessage(Exception exception) {
+        Bundle msgBundle = new Bundle();
+        msgBundle.putBoolean(SUCCESS_KEY, false);
+        msgBundle.putSerializable(EXCEPTION_KEY, exception);
+
+        Message msg = Message.obtain();
+        msg.setData(msgBundle);
+
+        messageHandler.sendMessage(msg);
+    }
+
+    protected void sendFailedMessage(String message) {
+        Bundle msgBundle = new Bundle();
+        msgBundle.putBoolean(SUCCESS_KEY, false);
+        msgBundle.putString(MESSAGE_KEY, message);
+
+        Message msg = Message.obtain();
+        msg.setData(msgBundle);
+
+        messageHandler.sendMessage(msg);
+    }
+
     @Override
     public void run() {};
 }
