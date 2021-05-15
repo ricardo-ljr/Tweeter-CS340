@@ -31,15 +31,4 @@ public class PostStatusTask extends Template {
             sendMessage(EXCEPTION_KEY, ex);
         }
     }
-
-    private void sendSuccessMessage() {
-        Bundle msgBundle = new Bundle();
-        msgBundle.putBoolean(SUCCESS_KEY, true);
-
-        Message msg = Message.obtain();
-        msg.setData(msgBundle);
-
-        messageHandler.sendMessage(msg);
-    }
-
 }

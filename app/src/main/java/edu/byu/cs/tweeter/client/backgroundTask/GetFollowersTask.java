@@ -39,24 +39,11 @@ public class GetFollowersTask extends Template {
                 TaskUtils.loadImage(u);
             }
 
-            sendSuccessMessage(followers, hasMorePages);
+            sendMessageWithBool(FOLLOWEES_KEY, (Serializable) followers, hasMorePages);
 
         } catch (Exception ex) {
             Log.e(LOG_TAG, ex.getMessage(), ex);
             sendMessage(EXCEPTION_KEY, ex);
         }
     }
-
-    private void sendSuccessMessage(List<User> followers, boolean hasMorePages) {
-        Bundle msgBundle = new Bundle();
-        msgBundle.putBoolean(SUCCESS_KEY, true);
-        msgBundle.putSerializable(FOLLOWERS_KEY, (Serializable) followers);
-        msgBundle.putBoolean(MORE_PAGES_KEY, hasMorePages);
-
-        Message msg = Message.obtain();
-        msg.setData(msgBundle);
-
-        messageHandler.sendMessage(msg);
-    }
-
 }

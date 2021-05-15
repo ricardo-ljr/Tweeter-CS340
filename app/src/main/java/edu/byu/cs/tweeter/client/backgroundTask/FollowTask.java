@@ -26,7 +26,7 @@ public class FollowTask extends Template {
     public void run() {
         try {
             Serializable value = null;
-            sendMessage(NULL_TAG, value);
+            sendSuccessMessage();
 
         } catch (Exception ex) {
             Log.e(LOG_TAG, ex.getMessage(), ex);

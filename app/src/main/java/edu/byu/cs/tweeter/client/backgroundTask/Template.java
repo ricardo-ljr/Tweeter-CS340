@@ -124,12 +124,33 @@ public class Template implements Runnable {
         this.messageHandler = messageHandler;
     }
 
+    protected void sendSuccessMessage() {
+        Bundle msgBundle = new Bundle();
+        msgBundle.putBoolean(SUCCESS_KEY, true);
+
+        Message msg = Message.obtain();
+        msg.setData(msgBundle);
+
+        messageHandler.sendMessage(msg);
+    }
 
     protected void sendMessage(String key, Serializable value) {
         Bundle msgBundle = new Bundle();
         msgBundle.putBoolean(SUCCESS_KEY, true);
         Message msg = Message.obtain();
         msgBundle.putSerializable(key, value);
+        msg.setData(msgBundle);
+
+        messageHandler.sendMessage(msg);
+    }
+
+    protected void sendMessageWithBool(String key, Serializable value, boolean isTrue) {
+        Bundle msgBundle = new Bundle();
+        msgBundle.putBoolean(SUCCESS_KEY, true);
+        msgBundle.putSerializable(key, (Serializable) value);
+        msgBundle.putBoolean(MORE_PAGES_KEY, isTrue);
+
+        Message msg = Message.obtain();
         msg.setData(msgBundle);
 
         messageHandler.sendMessage(msg);

@@ -40,24 +40,12 @@ public class GetFeedTask extends Template {
                 TaskUtils.loadImage(s.getUser());
             }
 
-            sendSuccessMessage(statuses, hasMorePages);
+            sendMessageWithBool(STATUSES_KEY, (Serializable) statuses, hasMorePages);
 
         } catch (Exception ex) {
             Log.e(LOG_TAG, ex.getMessage(), ex);
             sendMessage(EXCEPTION_KEY, ex);
         }
-    }
-
-    private void sendSuccessMessage(List<Status> statuses, boolean hasMorePages) {
-        Bundle msgBundle = new Bundle();
-        msgBundle.putBoolean(SUCCESS_KEY, true);
-        msgBundle.putSerializable(STATUSES_KEY, (Serializable) statuses);
-        msgBundle.putBoolean(MORE_PAGES_KEY, hasMorePages);
-
-        Message msg = Message.obtain();
-        msg.setData(msgBundle);
-
-        messageHandler.sendMessage(msg);
     }
 
 }
