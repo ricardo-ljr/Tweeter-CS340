@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.os.Message;
 
+import java.io.Serializable;
+
 import edu.byu.cs.tweeter.shared.domain.AuthToken;
 import edu.byu.cs.tweeter.shared.domain.Status;
 import edu.byu.cs.tweeter.shared.domain.User;
@@ -123,22 +125,11 @@ public class Template implements Runnable {
     }
 
 
-    protected void sendSuccessMessageTemplate() {
+    protected void sendMessage(String key, Serializable value) {
         Bundle msgBundle = new Bundle();
         msgBundle.putBoolean(SUCCESS_KEY, true);
-
         Message msg = Message.obtain();
-        msg.setData(msgBundle);
-
-        messageHandler.sendMessage(msg);
-    }
-
-    protected void sendExceptionMessage(Exception exception) {
-        Bundle msgBundle = new Bundle();
-        msgBundle.putBoolean(SUCCESS_KEY, false);
-        msgBundle.putSerializable(EXCEPTION_KEY, exception);
-
-        Message msg = Message.obtain();
+        msgBundle.putSerializable(key, value);
         msg.setData(msgBundle);
 
         messageHandler.sendMessage(msg);

@@ -28,7 +28,7 @@ public class PostStatusTask extends Template {
 
         } catch (Exception ex) {
             Log.e(LOG_TAG, ex.getMessage(), ex);
-            sendExceptionMessage(ex);
+            sendMessage(EXCEPTION_KEY, ex);
         }
     }
 
